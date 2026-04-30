@@ -24,9 +24,9 @@
                 </fieldset>
                 <fieldset class="fieldset">
                     <legend class="fieldset-legend">Image</legend>
-                    <input name="images[]" multiple type="file" class="file-input w-full @error('images.*') file-input-error @enderror" />
+                    <input name="images[]" multiple type="file" accept="image/*" class="file-input w-full @error('images.*') file-input-error @enderror" />
                     @error('images.*')
-                    <p class="label text-error"> {{$message}}</p>
+                        <p class="label text-error"> {{ $message }}</p>
                     @enderror
                     <label class="label">Max size 2MB</label>
                 </fieldset>

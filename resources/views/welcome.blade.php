@@ -1,5 +1,5 @@
 @extends('partials.layout')
-@section('title', 'Home Page')
+@section('title', 'Dashboard Page')
 @section('content')
     {{ $posts->links() }}
     <div class="grid grid-cols-4 gap-4">

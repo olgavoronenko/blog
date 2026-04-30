@@ -12,9 +12,9 @@
                     </figure>
                 @elseif($post->images->count() > 1)
                     <div class="carousel rounded-box">
-                        @foreach($post->images as $image)
+                        @foreach ($post->images as $image)
                             <div class="carousel-item w-full">
-                                <img src="{{ $image->url }}"/>
+                                <img src="{{ $image->url }}" />
                             </div>
                         @endforeach
                     </div>
@@ -26,7 +26,25 @@
                     <p class="text-neutral-content">{{ $post->user->name }}</p>
                     <p class="text-neutral-content">{{ $post->created_at->diffForHumans() }}</p>
                     <p class="text-neutral-content"><b>Comments:</b> {{ $post->comments_count }}</p>
+                    <p class="text-neutral-content"><b>Likes:</b> {{ $post->likes_count }}</p>
+
+                        <div>
+                            @foreach($post->tags as $tag)
+                            <a href="{{route('tag',['tag' =>$tag])}}">
+                            <div class="badge badge-primary-outline">{{$tag->name}}</div>
+                            </a>
+                            @endforeach
+                        </div>
+
                     <div class="card-actions justify-end">
+                        <form action="{{ route('post.like', ['post' => $post]) }}" method="POST">
+                            @csrf
+                            @if ($post->authHasLiked)
+                                <button class="btn btn-error">Unlike</button>
+                            @else
+                                <button class="btn btn-secondary">Like</button>
+                            @endif
+                        </form>
                         <a href="{{ route('post', ['post' => $post]) }}" class="btn btn-primary">Read more</a>
                     </div>
                 </div>

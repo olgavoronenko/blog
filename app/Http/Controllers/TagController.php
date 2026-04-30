@@ -7,37 +7,32 @@ use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
+
     public function index()
     {
-        $tags = Tag::latest()->paginate(10);
-        return view('admin.tags.index', compact('tags'));
+        return response()->json(
+            Tag::latest()->paginate(10)
+        );
     }
 
-    public function create()
+  
+    public function show(Tag $tag)
     {
-        return view('admin.tags.create');
+        return response()->json($tag);
     }
 
+   
     public function store(Request $request)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:50|unique:tags,name',
         ]);
 
-        Tag::create($validated);
-        return redirect()->route('tags.index')->with('success', 'Tag created successfully!');
+        $tag = Tag::create($validated);
+
+        return response()->json($tag, 201);
     }
 
-    public function show(Tag $tag)
-    {
-        $posts = $tag->posts()->latest()->paginate(10);
-        return view('admin.tags.show', compact('tag', 'posts'));
-    }
-
-    public function edit(Tag $tag)
-    {
-        return view('admin.tags.edit', compact('tag'));
-    }
 
     public function update(Request $request, Tag $tag)
     {
@@ -46,12 +41,17 @@ class TagController extends Controller
         ]);
 
         $tag->update($validated);
-        return redirect()->route('tags.index')->with('success', 'Tag updated successfully!');
+
+        return response()->json($tag);
     }
 
+ 
     public function destroy(Tag $tag)
     {
         $tag->delete();
-        return redirect()->route('tags.index')->with('success', 'Tag deleted successfully!');
+
+        return response()->json([
+            'message' => 'Tag deleted'
+        ]);
     }
 }

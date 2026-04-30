@@ -30,4 +30,6 @@ class PublicController extends Controller
         $posts = $tag->posts()->with('images', 'user', 'tags')->withCount('comments', 'likes')->latest()->simplePaginate(16);
         return view('welcome', compact('posts'));
     }
+
+    
 }

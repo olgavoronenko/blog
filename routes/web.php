@@ -4,6 +4,7 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PublicController::class, 'index'])->name('home');
@@ -29,6 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/posts/{post}/view', [PostController::class, 'show'])->name('posts.show');
 
     Route::resource('/admin/posts', PostController::class);
+    Route::resource('/admin/tags', TagController::class);
+
 
     Route::post('/post/{post}/like', [LikeController::class, 'store'])->name('post.like');
 

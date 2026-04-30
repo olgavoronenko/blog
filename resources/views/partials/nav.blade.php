@@ -13,7 +13,7 @@
                 <a>Admin</a>
                 <ul class="p-2">
                     <li><a href="{{ route('posts.index') }}">Posts</a></li>
-                    <li><a>Submenu 2</a></li>
+                    <li><a href="{{ route('tags.index') }}">Tags</a></li>
                 </ul>
                 </li>
                 <li><a>Item 3</a></li>
@@ -33,7 +33,7 @@
                     <summary>Admin</summary>
                     <ul class="p-2 z-1">
                         <li><a href="{{ route('posts.index') }}">Posts</a></li>
-                        <li><a>Submenu 2</a></li>
+                        <li><a href="{{ route('tags.index') }}">Tags</a></li>
                     </ul>
                 </details>
             </li>
@@ -43,25 +43,25 @@
     </div>
     <div class="navbar-end gap-4">
         @auth
-            <ul class="menu menu-horizontal px-1">
-                <li></li>
-                <details>
-                    <summary>{{ auth()->user()->name }}</summary>
-                    <ul class="p-2 z-1">
-                        <li><a href="{{ route('profile.edit') }}">Posts</a></li>
-                        <li>
-                            <form action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <button>Logout</button>
-                            </form>
-                        </li>
-                    </ul>
-                </details>
-                </li>
-            </ul>
+        <ul class="menu menu-horizontal px-1">
+            <li></li>
+            <details>
+                <summary>{{ auth()->user()->name }}</summary>
+                <ul class="p-2 z-1">
+                    <li><a href="{{ route('profile.edit') }}">Profile</a></li>
+                    <li>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button>Logout</button>
+                        </form>
+                    </li>
+                </ul>
+            </details>
+            </li>
+        </ul>
         @else
-            <a href="{{ route('register') }}" class="btn btn-primary-outline">Register</a>
-            <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
+        <a href="{{ route('register') }}" class="btn btn-primary-outline">Register</a>
+        <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
         @endauth
     </div>
 </div>
